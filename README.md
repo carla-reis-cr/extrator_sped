@@ -50,7 +50,7 @@ python -m spacy download pt_core_news_sm
 ### 1️⃣ Extração do Texto do PDF
 
 ```bash
-python src/extrair_texto.py
+python src/extrator.py
 ```
 
 Isso gerará um arquivo `output/texto_extraido.txt` contendo o texto extraído do Guia Prático.
