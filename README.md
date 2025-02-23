@@ -1,76 +1,139 @@
-# Extração e Validação de Regras do SPED (EFD ICMS/IPI)
+# **SPED Parser**
 
-## Descrição do Projeto
+Este projeto tem como objetivo criar um **parser** para extrair regras e validações do guia prático do SPED (Sistema Público de Escrituração Digital) usando técnicas de **Processamento de Linguagem Natural (NLP)**. As regras extraídas são formatadas em um arquivo CSV e integradas a um banco de dados para gerar selects dinâmicos e treinar um modelo de IA que prevê inconsistências em arquivos do SPED.
 
-Este projeto tem como objetivo **extrair regras do Guia Prático da EFD ICMS/IPI** e utilizar **Inteligência Artificial (IA)** para validar registros fiscais, identificando possíveis erros nos dados do cliente.
+---
 
-## Estrutura do Projeto
+## **Funcionalidades**
 
-```plaintext
-extrator_sped/
-│── data/                  # Pasta para armazenar o PDFs dos testes do Guia Prático
-│   ├── guia_pratico_efd_icms_ipi.pdf
-│── output/                # Pasta para salvar as regras extraídas
-│   ├── regras_extraidas.json
-│── src/                   # Código-fonte do projeto
-│   ├── extrair_texto.py   # Extração do texto do PDF
-│   ├── extrair_regras.py  # Identifica e organiza regras
-│   ├── modelo_ia.py       # IA para validação dos registros
-│── requirements.txt       # Dependências do projeto
-│── README.md              # Documentação do projeto
-```
+- **Extrair regras do guia do SPED**:
+  - Identifica campos, validações, dependências e tabelas.
+- **Gerar arquivo CSV**:
+  - Estrutura as regras em um formato tabular.
+- **Integração com banco de dados**:
+  - Mapeia as regras para tabelas do banco de dados.
+- **Treinamento de modelo de IA**:
+  - Prepara dados para treinar um modelo que prevê inconsistências.
 
-## Configuração do Ambiente
+---
 
-### 1️⃣ Criar e ativar o ambiente virtual
+## **Tecnologias Utilizadas**
 
-Execute os comandos abaixo no terminal:
+- **Linguagem**: Python
+- **NLP**: `spaCy`, `NLTK`
+- **Manipulação de Dados**: `pandas`, `numpy`
+- **Banco de Dados**: `SQLAlchemy`
+- **Machine Learning**: `scikit-learn`
+- **PDF Parsing**: `PyPDF2`
+- **Gerenciamento de Ambiente**: `venv`
 
-```bash
-python -m venv venv
-source venv/bin/activate  # Linux/macOS
-venv\Scripts\activate     # Windows
-```
+---
 
-### 2️⃣ Instalar dependências
+## **Como Executar o Projeto**
 
-```bash
-pip install -r requirements.txt
-```
+### **Pré-requisitos**
 
-Se o arquivo `requirements.txt` ainda não existir, instale as dependências manualmente:
+- Python 3.8 ou superior.
+- Git (opcional, para clonar o repositório).
 
-```bash
-pip install pymupdf pdfplumber pandas spacy
-python -m spacy download pt_core_news_sm
-```
+---
 
-## Execução do Projeto
+### **Passos para Configuração**
 
-### 1️⃣ Extração do Texto do PDF
+1. **Clonar o repositório** (opcional):
 
-```bash
-python src/extrator.py
-```
+   ```bash
+   git clone https://github.com/carla-reis-cr/sped-parser.git
+   cd sped-parser
+   ```
 
-Isso gerará um arquivo `output/texto_extraido.txt` contendo o texto extraído do Guia Prático.
+2. **Criar e ativar o ambiente virtual**:
 
-### 2️⃣ Extração e Estruturação das Regras
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Linux/MacOS
+   venv\Scripts\activate     # Windows
+   ```
 
-```bash
-python src/extrair_regras.py
-```
+3. **Instalar as dependências**:
 
-Isso gerará um arquivo `output/regras_extraidas.json` com as regras extraídas dos registros 0200 e 0205.
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-### 3️⃣ Validação de Registros com IA
+4. **Executar o projeto**:
 
-```bash
-python src/modelo_ia.py
-```
+   ```bash
+   python main.py
+   ```
 
-Esse script treinará um modelo para detectar erros nos registros de clientes.
+## Explicação dos Arquivos
 
-## Autor
+### `main.py`:
 
-**Carla Reis** - Trabalho de Conclusão de Curso (TCC) - 2025
+- Ponto de entrada do programa. Orquestra a extração de regras, geração de CSV e integração com o banco de dados.
+
+### `src/`:
+
+Contém os módulos do projeto:
+
+- **`pdf_parser.py`**: Extrai texto de PDFs.
+- **`nlp_processor.py`**: Processa o texto com NLP para extrair regras.
+- **`data_handler.py`**: Manipula dados e gera o CSV.
+- **`db_integration.py`**: Integra com o banco de dados.
+- **`utils.py`**: Funções utilitárias (ex.: regex, limpeza de texto).
+
+### `data/`:
+
+- Armazena arquivos de entrada (PDFs) e saída (CSVs).
+
+### `tests/`:
+
+- Contém testes unitários para cada módulo.
+
+---
+
+## Exemplo de Uso
+
+1. Coloque o guia do SPED em PDF na pasta `data/input/`.
+2. Execute o projeto:
+   ```bash
+   python main.py
+   ```
+3. O arquivo CSV com as regras será gerado em `data/output/regras_sped.csv`.
+
+4. As regras também serão inseridas no banco de dados configurado.
+
+## Contribuição
+
+1. Faça um fork do projeto.
+2. Crie uma branch para sua feature:
+
+   ```bash
+   git checkout -b minha-feature
+   ```
+
+3. Commit suas alterações:
+
+   ```bash
+   git commit -m "Adicionando nova funcionalidade"
+   ```
+
+4. Envie a branch:
+
+   ```bash
+   git push origin minha-feature
+   ```
+
+5. Abra um pull request.
+
+## Licença
+
+Este projeto é um **trabalho acadêmico** e, por enquanto, não possui uma licença definida. A licença será estabelecida conforme a necessidade e o contexto futuro do projeto.
+
+---
+
+## Contato
+
+- **Autor**: [Carla Reis]
+- **Email**: [carla.cr.reis@gmail.com]
