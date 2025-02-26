@@ -1,7 +1,7 @@
 from src.pdf_parser import extract_text_from_pdf
 from src.utils import clean_text
 from src.data_handler import create_dataframe, export_to_csv
-from src.nlp_processor import load_nlp_model, extract_rules
+from src.nlp_processor import load_nlp_model, extract_rules, save_entities_to_txt
 
 def main():
     # Caminhos dos arquivos
@@ -16,7 +16,9 @@ def main():
     print("Processando texto com NLP...")
     nlp_model = load_nlp_model()
     nlp_model.max_length = 5000000
-    rules = extract_rules(text, nlp_model)
+    rules, entities = extract_rules(text, nlp_model)
+
+    save_entities_to_txt(entities, "data/output/entidades.txt")
 
     # 3. Criar DataFrame e exportar para CSV
     print("Exportando regras para CSV...")
