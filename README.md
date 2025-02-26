@@ -25,7 +25,7 @@ Este projeto tem como objetivo criar um **parser** para extrair regras e valida�
 - **Banco de Dados**: `SQLAlchemy`
 - **Machine Learning**: `scikit-learn`
 - **PDF Parsing**: `PyPDF2`
-- **Gerenciamento de Ambiente**: `venv`
+- **Gerenciamento de Ambiente**: `conda`
 
 ---
 
@@ -33,9 +33,8 @@ Este projeto tem como objetivo criar um **parser** para extrair regras e valida�
 
 ### **Pré-requisitos**
 
-- Python 3.8 ou superior.
-- Git (opcional, para clonar o repositório).
-
+- Python 3.8 ou superior
+- Anaconda3
 ---
 
 ### **Passos para Configuração**
@@ -43,25 +42,28 @@ Este projeto tem como objetivo criar um **parser** para extrair regras e valida�
 1. **Clonar o repositório** (opcional):
 
    ```bash
-   git clone https://github.com/carla-reis-cr/sped-parser.git
-   cd sped-parser
+   git clone https://github.com/carla-reis-cr/extrator_sped.git
+   cd extrator_sped
    ```
 
-2. **Criar e ativar o ambiente virtual**:
+2. **Criar o ambiente virtual**:
 
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # Linux/MacOS
-   venv\Scripts\activate     # Windows
+   conda env create -f environment.yml
    ```
 
-3. **Instalar as dependências**:
+3. **Ativa o ambiente virtual**:
 
    ```bash
-   pip install -r requirements.txt
+   conda activate extrator_sped
+   ```
+4. **Instala os modelos necessários:**
+
+   ```bash
+   python -m spacy download pt_core_news_sm
    ```
 
-4. **Executar o projeto**:
+5. **Executar o projeto**:
 
    ```bash
    python main.py

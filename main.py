@@ -1,9 +1,11 @@
 from src.pdf_parser import extract_text_from_pdf
 from src.utils import clean_text
+from src.data_handler import create_dataframe, export_to_csv
+from src.nlp_processor import load_nlp_model, extract_rules
 
 def main():
     # Caminhos dos arquivos
-    pdf_path = "data/input/guia_pratico_efd_icms_ipi.pdf"
+    pdf_path = "data/input/efd_icms_ipi_3.1.7.pdf"
     csv_output_path = "data/output/regras_sped.csv"
     # 1. Extrair texto do PDF
     print("Extraindo texto do PDF...")
@@ -13,6 +15,7 @@ def main():
     # 2. Processar texto com NLP
     print("Processando texto com NLP...")
     nlp_model = load_nlp_model()
+    nlp_model.max_length = 5000000
     rules = extract_rules(text, nlp_model)
 
     # 3. Criar DataFrame e exportar para CSV
