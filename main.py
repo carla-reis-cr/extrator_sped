@@ -1,5 +1,5 @@
 from src.pdf_parser import extract_text_from_pdf
-from src.utils import clean_text
+from src.utils import clean_text, read_arquive
 from src.data_handler import create_dataframe, export_to_csv
 from src.nlp_processor import load_nlp_model, extract_rules, save_entities_to_txt
 
@@ -9,14 +9,15 @@ def main():
     csv_output_path = "data/output/regras_sped.csv"
     # 1. Extrair texto do PDF
     print("Extraindo texto do PDF...")
-    text = extract_text_from_pdf(pdf_path)
-    text = clean_text(text)
+    extract_text_from_pdf(pdf_path)
+    #text = clean_text(text)
 
     # 2. Processar texto com NLP
     print("Processando texto com NLP...")
+    textNlp = read_arquive("data/output/text_extract.txt")
     nlp_model = load_nlp_model()
     nlp_model.max_length = 5000000
-    rules, entities = extract_rules(text, nlp_model)
+    rules, entities = extract_rules(textNlp, nlp_model)
 
     save_entities_to_txt(entities, "data/output/entidades.txt")
 
